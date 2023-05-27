@@ -1,6 +1,5 @@
 package cn.edu.jnu.springmvcdemo.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -12,13 +11,16 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("login");
         registry.addViewController("/login.html").setViewName("login");
-        registry.addViewController("/upload.html").setViewName("upload");
-        registry.addViewController("/download.html").setViewName("download");
+        registry.addViewController("/dashboard.html").setViewName("dashboard");
+        registry.addViewController("/stu/list.html").setViewName("stu/list");
+
+
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginHandlerInterceptor())
-                .excludePathPatterns("/login.html", "/login", "/", "/download/hutool");
+                .excludePathPatterns("/login.html", "/login", "/")
+                .excludePathPatterns("/css/**", "/image/**", "/stu/**", "/js/**");
     }
 }
